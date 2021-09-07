@@ -30,7 +30,17 @@
             android:layout_height="100dp"
             android:background="@drawable/rounded_select_photo"
             android:text="sua foto"
+            android:visibility="visible"
             app:backgroundTint="@color/blue_pg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_foto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
