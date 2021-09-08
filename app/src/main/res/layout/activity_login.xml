@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/logo_pigeon"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="32dp"
         android:src="@drawable/pigeon_logo"
         app:layout_constraintBottom_toTopOf="@+id/cardview_login"

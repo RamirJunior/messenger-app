@@ -8,7 +8,7 @@
 
 - Cadastro de usuário;
 - Login pré cadastrado;
-- Salvamento de conversa e suas mensagens;
+- Carregamento de conversas;
 - Envio e recebimento real-time de mensagens.
 
 ### Desafio :
@@ -24,3 +24,4 @@
 - Firebase
 - RecyclerView
 - Constraint Layout
+- Circle Image View
