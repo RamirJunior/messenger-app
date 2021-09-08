@@ -15,13 +15,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-import com.ramirjr.pigeon.databinding.ActivityMainBinding
+import com.ramirjr.pigeon.databinding.ActivityRegisterBinding
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
     private val binding by lazy {
-        ActivityMainBinding.inflate(layoutInflater)
+        ActivityRegisterBinding.inflate(layoutInflater)
     }
     var uriPhotoSelected: Uri? = null
 
@@ -92,10 +92,6 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Falha ao criar usuario: ${it.message}", Toast.LENGTH_SHORT)
                     .show()
             }
-
-        if (binding.imageviewUserPhoto.background == null) {
-            binding.imageviewUserPhoto.setBackgroundResource(R.drawable.std_profile)
-        }
         return false
     }
 

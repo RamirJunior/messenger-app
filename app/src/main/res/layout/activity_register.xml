@@ -15,6 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/cardview_register"
         tools:layout_editor_absoluteX="16dp">
 
+
         <ImageView
             android:id="@+id/logo_pigeon"
             android:layout_width="200dp"
@@ -36,14 +37,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageview_user_photo"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:civ_border_color="@color/white"
+            app:civ_border_width="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_user_photo"
+            app:layout_constraintEnd_toEndOf="@+id/btn_user_photo"
+            app:layout_constraintStart_toStartOf="@+id/btn_user_photo"
+            app:layout_constraintTop_toTopOf="@+id/btn_user_photo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
