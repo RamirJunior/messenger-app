@@ -63,5 +63,10 @@ dependencies {
     implementation("androidx.multidex:multidex:2.0.1")
     // Circle Image View
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    // Groupie
+    implementation "com.xwray:groupie:2.7.0"
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 
 }
