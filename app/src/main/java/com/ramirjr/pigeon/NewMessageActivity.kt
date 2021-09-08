@@ -2,7 +2,9 @@ package com.ramirjr.pigeon
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.FirebaseDatabase
 import com.ramirjr.pigeon.databinding.ActivityNewMessageBinding
+import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 
@@ -16,10 +18,21 @@ class NewMessageActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Escolha um usuário"
 
-//        val adapter = GroupAdapter<GroupieViewHolder>()
-//        adapter.add()
-//        binding.recyclerviewNewMessages.adapter = adapter
+        val adapter = GroupAdapter<GroupieViewHolder>()
+        adapter.add(UserItem())
+        adapter.add(UserItem())
+        adapter.add(UserItem())
+
+        binding.recyclerviewNewMessages.adapter = adapter
+
+        fetchUsers()
     }
+
+    private fun fetchUsers() {
+        val ref = FirebaseDatabase.getInstance().getReference("/users")
+        ref.addListenerForSingleValueEvent()
+    }
+
 }
 
 class UserItem : Item<GroupieViewHolder>() {
@@ -29,7 +42,7 @@ class UserItem : Item<GroupieViewHolder>() {
 
 
     override fun getLayout(): Int {
-        TODO("Not yet implemented")
+        return R.layout.user_row_new_new_message
     }
 
 }
