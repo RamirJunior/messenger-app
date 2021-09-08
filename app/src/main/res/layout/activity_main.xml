@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_"
-    tools:context=".CadastroActivity">
+    tools:context=".RegisterActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardview_registro"
+        app:layout_constraintBottom_toTopOf="@+id/cardview_register"
         tools:layout_editor_absoluteX="16dp">
 
         <ImageView
@@ -25,10 +25,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btn_escolher_foto"
+            android:id="@+id/btn_user_photo"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/rounded_select_photo"
+            android:background="@drawable/rounded_corners"
             android:text="sua foto"
             android:visibility="visible"
             app:backgroundTint="@color/blue_pg"
@@ -37,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/iv_foto"
+            android:id="@+id/imageview_user_photo"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:visibility="invisible"
@@ -48,7 +48,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_registro"
+        android:id="@+id/cardview_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -82,7 +82,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_nome"
+                android:id="@+id/txt_input_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Nome"
@@ -100,13 +100,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_email"
+                android:id="@+id/txt_input_email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="E-mail"
-                app:layout_constraintEnd_toEndOf="@+id/input_nome"
-                app:layout_constraintStart_toStartOf="@+id/input_nome"
-                app:layout_constraintTop_toBottomOf="@+id/input_nome">
+                app:layout_constraintEnd_toEndOf="@+id/txt_input_name"
+                app:layout_constraintStart_toStartOf="@+id/txt_input_name"
+                app:layout_constraintTop_toBottomOf="@+id/txt_input_name">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -117,13 +117,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_senha"
+                android:id="@+id/txt_input_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Senha"
-                app:layout_constraintEnd_toEndOf="@+id/input_email"
-                app:layout_constraintStart_toStartOf="@+id/input_email"
-                app:layout_constraintTop_toBottomOf="@+id/input_email">
+                app:layout_constraintEnd_toEndOf="@+id/txt_input_email"
+                app:layout_constraintStart_toStartOf="@+id/txt_input_email"
+                app:layout_constraintTop_toBottomOf="@+id/txt_input_email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -134,7 +134,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btn_registrar"
+                android:id="@+id/btn_register"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="32dp"
@@ -142,9 +142,9 @@
                 android:background="@drawable/rounded_btn"
                 android:text="Registrar"
                 app:backgroundTint="@color/blue_pg"
-                app:layout_constraintEnd_toEndOf="@+id/input_senha"
-                app:layout_constraintStart_toStartOf="@+id/input_senha"
-                app:layout_constraintTop_toBottomOf="@+id/input_senha" />
+                app:layout_constraintEnd_toEndOf="@+id/txt_input_password"
+                app:layout_constraintStart_toStartOf="@+id/txt_input_password"
+                app:layout_constraintTop_toBottomOf="@+id/txt_input_password" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/textview_grupo"
@@ -153,10 +153,10 @@
                 android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_registrar">
+                app:layout_constraintTop_toBottomOf="@id/btn_register">
 
                 <TextView
-                    android:id="@+id/textview_ja_tenho_conta"
+                    android:id="@+id/textview_already_have_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Já tem uma conta?"
@@ -164,14 +164,14 @@
                     app:layout_constraintTop_toTopOf="@+id/textview_grupo" />
 
                 <TextView
-                    android:id="@+id/textview_faca_login"
+                    android:id="@+id/textview_sign_here"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:text="Entre aqui."
                     android:textColor="@color/blue_pg"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textview_ja_tenho_conta"
+                    app:layout_constraintStart_toEndOf="@+id/textview_already_have_account"
                     app:layout_constraintTop_toTopOf="@+id/textview_grupo" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

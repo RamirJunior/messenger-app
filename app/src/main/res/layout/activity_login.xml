@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_"
-    tools:context=".CadastroActivity">
+    tools:context=".RegisterActivity">
 
     <ImageView
         android:id="@+id/logo_pigeon"
@@ -50,7 +50,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_email"
+                android:id="@+id/txt_input_email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="E-mail"
@@ -67,13 +67,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_senha"
+                android:id="@+id/txt_input_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Senha"
-                app:layout_constraintEnd_toEndOf="@+id/input_email"
-                app:layout_constraintStart_toStartOf="@+id/input_email"
-                app:layout_constraintTop_toBottomOf="@+id/input_email">
+                app:layout_constraintEnd_toEndOf="@+id/txt_input_email"
+                app:layout_constraintStart_toStartOf="@+id/txt_input_email"
+                app:layout_constraintTop_toBottomOf="@+id/txt_input_email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -92,9 +92,9 @@
                 android:text="Lembrar minha conta"
                 android:textAlignment="textStart"
                 android:theme="@style/SCBSwitch"
-                app:layout_constraintEnd_toEndOf="@+id/input_senha"
-                app:layout_constraintStart_toStartOf="@+id/input_senha"
-                app:layout_constraintTop_toBottomOf="@+id/input_senha" />
+                app:layout_constraintEnd_toEndOf="@+id/txt_input_password"
+                app:layout_constraintStart_toStartOf="@+id/txt_input_password"
+                app:layout_constraintTop_toBottomOf="@+id/txt_input_password" />
 
             <Button
                 android:id="@+id/btn_entrar"
@@ -104,8 +104,8 @@
                 android:background="@drawable/rounded_btn"
                 android:text="Entrar"
                 app:backgroundTint="@color/teal_700"
-                app:layout_constraintEnd_toEndOf="@+id/input_senha"
-                app:layout_constraintStart_toStartOf="@+id/input_senha"
+                app:layout_constraintEnd_toEndOf="@+id/txt_input_password"
+                app:layout_constraintStart_toStartOf="@+id/txt_input_password"
                 app:layout_constraintTop_toBottomOf="@+id/switch_lembrar_senha" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
