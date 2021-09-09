@@ -1,19 +1,18 @@
-package com.ramirjr.pigeon
+package com.ramirjr.pigeon.messages
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.ramirjr.pigeon.databinding.ActivityNewMessageBinding
-import com.squareup.picasso.Picasso
+import com.ramirjr.pigeon.models.User
+import com.ramirjr.pigeon.models.UserItem
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.Item
 
 class NewMessageActivity : AppCompatActivity() {
 
@@ -49,6 +48,12 @@ class NewMessageActivity : AppCompatActivity() {
                         adapter.add(UserItem(user))
                     }
                 }
+                adapter.setOnItemClickListener { item, view ->
+                    val intent = Intent(view.context, ChatLogActivity::class.java)
+                    startActivity(intent)
+
+                    finish()
+                }
                 binding.recyclerviewNewMessages.adapter = adapter
             }
 
@@ -57,19 +62,4 @@ class NewMessageActivity : AppCompatActivity() {
             }
         })
     }
-
-}
-
-class UserItem(val user: User) : Item<GroupieViewHolder>() {
-    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.findViewById<TextView>(R.id.textview_username).text = user.username
-
-        Picasso.get().load(user.profileImageUrl)
-            .into(viewHolder.itemView.findViewById<ImageView>(R.id.imageview_new_message))
-    }
-
-    override fun getLayout(): Int {
-        return R.layout.user_row_new_new_message
-    }
-
 }

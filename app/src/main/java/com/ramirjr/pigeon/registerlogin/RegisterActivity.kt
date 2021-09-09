@@ -1,4 +1,4 @@
-package com.ramirjr.pigeon
+package com.ramirjr.pigeon.registerlogin
 
 import android.content.Intent
 import android.graphics.ImageDecoder
@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.ramirjr.pigeon.databinding.ActivityRegisterBinding
+import com.ramirjr.pigeon.messages.LatestMessagesActivity
+import com.ramirjr.pigeon.models.User
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -129,9 +131,4 @@ class RegisterActivity : AppCompatActivity() {
                 startActivity(intent)
             }
     }
-
-}
-
-class User(val uid: String, val username: String, val profileImageUrl: String) {
-    constructor() : this("", "", "")
 }

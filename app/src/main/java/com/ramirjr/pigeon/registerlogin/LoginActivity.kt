@@ -1,4 +1,4 @@
-package com.ramirjr.pigeon
+package com.ramirjr.pigeon.registerlogin
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
