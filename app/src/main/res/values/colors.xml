@@ -16,5 +16,6 @@
     <color name="red_pg">#cf4647</color>
     <color name="dark_pg">#524656</color>
     <color name="gray_pg">#eeeeee</color>
+    <color name="black_pg">#3c3c3c</color>
 
 </resources>
