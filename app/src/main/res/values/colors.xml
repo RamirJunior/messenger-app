@@ -10,6 +10,8 @@
 
     <!--    MeHere Colors -->
     <color name="silver_pg">#a7c5bd</color>
+    <color name="green_pg">#E6FFF8</color>
+    <color name="cyan_pg">#E2F7FF</color>
     <color name="beige_pg">#e5ddcb</color>
     <color name="blue_pg">#29628F</color>
     <color name="orange_pg">#eb7b59</color>

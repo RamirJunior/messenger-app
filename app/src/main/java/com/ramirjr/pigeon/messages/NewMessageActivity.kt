@@ -23,13 +23,6 @@ class NewMessageActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = "Escolha um usuário"
-//
-//        val adapter = GroupAdapter<GroupieViewHolder>()
-//        adapter.add(UserItem())
-//        adapter.add(UserItem())
-//        adapter.add(UserItem())
-//
-//        binding.recyclerviewNewMessages.adapter = adapter
 
         fetchUsers()
     }
@@ -49,7 +42,9 @@ class NewMessageActivity : AppCompatActivity() {
                     }
                 }
                 adapter.setOnItemClickListener { item, view ->
+                    val userItem = item as UserItem
                     val intent = Intent(view.context, ChatLogActivity::class.java)
+                    intent.putExtra(USER_KEY, userItem.user.username)
                     startActivity(intent)
 
                     finish()
@@ -61,5 +56,9 @@ class NewMessageActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
+    }
+
+    companion object {
+        val USER_KEY = "USER_KEY"
     }
 }

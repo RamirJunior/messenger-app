@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_"
+    android:background="@drawable/gradient_pigeon1"
     tools:context=".registerlogin.RegisterActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/cardview_register"
         tools:layout_editor_absoluteX="16dp">
@@ -172,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:text="Entre aqui."
-                    android:textColor="@color/blue_pg"
+                    android:textColor="@color/teal_700"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/textview_already_have_account"
                     app:layout_constraintTop_toTopOf="@+id/textview_grupo" />

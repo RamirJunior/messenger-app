@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_"
+    android:background="@drawable/gradient_pigeon2"
     tools:context=".registerlogin.RegisterActivity">
 
     <ImageView
