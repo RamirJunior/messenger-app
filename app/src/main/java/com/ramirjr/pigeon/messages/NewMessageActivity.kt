@@ -23,7 +23,6 @@ class NewMessageActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = "Escolha um usuário"
-
         fetchUsers()
     }
 
@@ -53,7 +52,7 @@ class NewMessageActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                //TODO("Not yet implemented")
             }
         })
     }

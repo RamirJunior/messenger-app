@@ -1,6 +1,7 @@
 package com.ramirjr.pigeon.messages
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityChatLogBinding
@@ -20,6 +21,10 @@ class ChatLogActivity : AppCompatActivity() {
 //        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         supportActionBar?.title = username
 
+        sendTestMessages()
+    }
+
+    private fun sendTestMessages() {
         val adapter = GroupAdapter<GroupieViewHolder>()
 
         adapter.add(ChatItemReceived())
@@ -39,7 +44,8 @@ class ChatLogActivity : AppCompatActivity() {
 
 class ChatItemReceived : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-
+        viewHolder.itemView.findViewById<TextView>(R.id.textview_msg_received).text =
+            "Mensagem recebida..."
     }
 
     override fun getLayout(): Int {
@@ -49,7 +55,8 @@ class ChatItemReceived : Item<GroupieViewHolder>() {
 
 class ChatItemSent : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-
+        viewHolder.itemView.findViewById<TextView>(R.id.textview_msg_sent).text =
+            "Está é uma mensagem enviada que irá passar de uma linha para exibição..."
     }
 
     override fun getLayout(): Int {
