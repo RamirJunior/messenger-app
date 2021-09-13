@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityChatLogBinding
+import com.ramirjr.pigeon.models.ChatMessage
 import com.ramirjr.pigeon.models.User
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
@@ -26,13 +29,26 @@ class ChatLogActivity : AppCompatActivity() {
         sendTestMessages()
 
         binding.sendButtonChatLog.setOnClickListener {
-            Log.d("ChatLog", "Pronto para enviar sua mensagem?")
             performSendMessages()
         }
     }
 
     private fun performSendMessages() {
         val text = binding.edittextChatLog.text.toString()
+
+        val fromId = FirebaseAuth.getInstance().uid
+        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        val toId = user?.uid
+        if (fromId == null) return
+
+        val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
+        val chatMessage =
+            ChatMessage(ref.key!!, text, fromId, toId, System.currentTimeMillis() / 1000)
+        ref.setValue(chatMessage)
+            .addOnSuccessListener {
+                Log.d("ChatLog", "Mensagem salva ${ref.key}")
+
+            }
 
     }
 
