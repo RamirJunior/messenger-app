@@ -1,10 +1,12 @@
 package com.ramirjr.pigeon.messages
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityChatLogBinding
+import com.ramirjr.pigeon.models.User
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -17,35 +19,36 @@ class ChatLogActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val username = intent.getStringExtra(NewMessageActivity.USER_KEY)
-//        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
-        supportActionBar?.title = username
+        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        Log.d("ChatLog", "Usuário recebido = ${user}")
+        supportActionBar?.title = user?.username
 
         sendTestMessages()
+
+        binding.sendButtonChatLog.setOnClickListener {
+            Log.d("ChatLog", "Pronto para enviar sua mensagem?")
+            performSendMessages()
+        }
+    }
+
+    private fun performSendMessages() {
+        val text = binding.edittextChatLog.text.toString()
+
     }
 
     private fun sendTestMessages() {
         val adapter = GroupAdapter<GroupieViewHolder>()
 
-        adapter.add(ChatItemReceived())
-        adapter.add(ChatItemSent())
-        adapter.add(ChatItemReceived())
-        adapter.add(ChatItemSent())
-        adapter.add(ChatItemReceived())
-        adapter.add(ChatItemSent())
-        adapter.add(ChatItemReceived())
-        adapter.add(ChatItemSent())
-        adapter.add(ChatItemReceived())
-        adapter.add(ChatItemSent())
+        adapter.add(ChatItemReceived("hi there"))
+        adapter.add(ChatItemSent("helo who are you\nAre you ok?"))
 
         binding.recyclerviewChatLog.adapter = adapter
     }
 }
 
-class ChatItemReceived : Item<GroupieViewHolder>() {
+class ChatItemReceived(val text: String) : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.findViewById<TextView>(R.id.textview_msg_received).text =
-            "Mensagem recebida..."
+        viewHolder.itemView.findViewById<TextView>(R.id.textview_msg_received).text = text
     }
 
     override fun getLayout(): Int {
@@ -53,10 +56,9 @@ class ChatItemReceived : Item<GroupieViewHolder>() {
     }
 }
 
-class ChatItemSent : Item<GroupieViewHolder>() {
+class ChatItemSent(val text: String) : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.findViewById<TextView>(R.id.textview_msg_sent).text =
-            "Está é uma mensagem enviada que irá passar de uma linha para exibição..."
+        viewHolder.itemView.findViewById<TextView>(R.id.textview_msg_sent).text = text
     }
 
     override fun getLayout(): Int {

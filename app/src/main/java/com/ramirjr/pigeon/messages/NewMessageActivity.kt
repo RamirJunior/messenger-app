@@ -34,7 +34,6 @@ class NewMessageActivity : AppCompatActivity() {
                 val adapter = GroupAdapter<GroupieViewHolder>()
 
                 snapshot.children.forEach {
-                    Log.d("Nova Conversa", it.toString())
                     val user = it.getValue(User::class.java)
                     if (user != null) {
                         adapter.add(UserItem(user))
@@ -42,8 +41,11 @@ class NewMessageActivity : AppCompatActivity() {
                 }
                 adapter.setOnItemClickListener { item, view ->
                     val userItem = item as UserItem
-                    val intent = Intent(view.context, ChatLogActivity::class.java)
-                    intent.putExtra(USER_KEY, userItem.user.username)
+                    Log.d("New Message", "Usuário enviado = ${userItem}")
+
+                    val intent = Intent(view.context, ChatLogActivity::class.java).apply {
+                        putExtra(USER_KEY, userItem.user)
+                    }
                     startActivity(intent)
 
                     finish()

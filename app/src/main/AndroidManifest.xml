@@ -13,6 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pigeon">
         <activity
+            android:name=".messages.LatestMessagesActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".messages.ChatLogActivity"
             android:exported="true">
             <meta-data
@@ -30,18 +39,12 @@
             android:name=".registerlogin.RegisterActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".registerlogin.LoginActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".messages.LatestMessagesActivity"
-            android:exported="true" />
+
     </application>
 
 </manifest>
