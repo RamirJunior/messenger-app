@@ -2,6 +2,7 @@ package com.ramirjr.pigeon.messages
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -13,6 +14,7 @@ import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityChatLogBinding
 import com.ramirjr.pigeon.models.ChatMessage
 import com.ramirjr.pigeon.models.User
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -32,7 +34,6 @@ class ChatLogActivity : AppCompatActivity() {
         Log.d("ChatLog", "Usuário recebido = ${user}")
         supportActionBar?.title = user?.username
 
-//        sendTestMessages()
         listenFirebaseMessages()
         binding.sendButtonChatLog.setOnClickListener {
             performSendMessages()
@@ -45,13 +46,17 @@ class ChatLogActivity : AppCompatActivity() {
         ref.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
+
                 if (chatMessage != null) {
                     if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
-                        Log.d("ChatLog", "Mensagem enviada: ${chatMessage.message}")
-                        adapter.add(ChatItemSent(chatMessage.message))
+                        val currentUser = LatestMessagesActivity.currentUser ?: return
+                        Log.d("ChatLog", "usuario recebida: ${currentUser}")
+                        adapter.add(ChatItemSent(chatMessage.message, currentUser))
                     } else {
                         Log.d("ChatLog", "Mensagem recebida: ${chatMessage.message}")
-                        adapter.add(ChatItemReceived(chatMessage.message))
+                        val userReceived =
+                            intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+                        adapter.add(ChatItemReceived(chatMessage.message, userReceived!!))
                     }
                 }
             }
@@ -85,26 +90,20 @@ class ChatLogActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
         val chatMessage =
             ChatMessage(ref.key!!, text, fromId, toId, System.currentTimeMillis() / 1000)
-        ref.setValue(chatMessage)
-            .addOnSuccessListener {
-                Log.d("ChatLog", "Mensagem salva ${ref.key}")
-
-            }
-    }
-
-    private fun sendTestMessages() {
-        val adapter = GroupAdapter<GroupieViewHolder>()
-
-        adapter.add(ChatItemReceived("hi there"))
-        adapter.add(ChatItemSent("helo who are you\nAre you ok?"))
-
-        binding.recyclerviewChatLog.adapter = adapter
+        ref.setValue(chatMessage).addOnSuccessListener {
+            Log.d("ChatLog", "Mensagem salva ${ref.key}")
+        }
     }
 }
 
-class ChatItemReceived(val text: String) : Item<GroupieViewHolder>() {
+class ChatItemReceived(val text: String, val user: User) : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.findViewById<TextView>(R.id.textview_msg_received).text = text
+
+        //carregando imagem do contato na conversa
+        val uri = user.profileImageUrl
+        val targetImageView = viewHolder.itemView.findViewById<ImageView>(R.id.imageViewReceived)
+        Picasso.get().load(uri).into(targetImageView)
     }
 
     override fun getLayout(): Int {
@@ -112,9 +111,14 @@ class ChatItemReceived(val text: String) : Item<GroupieViewHolder>() {
     }
 }
 
-class ChatItemSent(val text: String) : Item<GroupieViewHolder>() {
+class ChatItemSent(val text: String, val user: User) : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.findViewById<TextView>(R.id.textview_msg_sent).text = text
+
+        //carregando minha imagem na conversa
+        val uri = user.profileImageUrl
+        val targetImageView = viewHolder.itemView.findViewById<ImageView>(R.id.imageViewSent)
+        Picasso.get().load(uri).into(targetImageView)
     }
 
     override fun getLayout(): Int {

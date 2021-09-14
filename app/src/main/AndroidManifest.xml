@@ -38,9 +38,7 @@
         <activity
             android:name=".registerlogin.RegisterActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize">
-
-        </activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".registerlogin.LoginActivity"
             android:windowSoftInputMode="adjustResize" />

@@ -11,8 +11,8 @@ class UserItem(val user: User) : Item<GroupieViewHolder>() {
     override fun bind(viewHolder: GroupieViewHolder, position: Int) {
         viewHolder.itemView.findViewById<TextView>(R.id.textview_username).text = user.username
 
-        Picasso.get().load(user.profileImageUrl)
-            .into(viewHolder.itemView.findViewById<ImageView>(R.id.imageview_new_message))
+        val targetImage = viewHolder.itemView.findViewById<ImageView>(R.id.imageview_new_message)
+        Picasso.get().load(user.profileImageUrl).into(targetImage)
     }
 
     override fun getLayout(): Int {
