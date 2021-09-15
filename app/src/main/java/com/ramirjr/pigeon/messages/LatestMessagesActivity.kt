@@ -7,12 +7,10 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityLatestMessagesBinding
+import com.ramirjr.pigeon.models.ChatMessage
 import com.ramirjr.pigeon.models.LatestMessageRow
 import com.ramirjr.pigeon.models.User
 import com.ramirjr.pigeon.registerlogin.LoginActivity
@@ -27,6 +25,8 @@ class LatestMessagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.recyclerviewLatestMessages.adapter = adapter
+
 //        setupDummyRow()
         listenLatestMessages()
 
@@ -38,16 +38,39 @@ class LatestMessagesActivity : AppCompatActivity() {
     private fun listenLatestMessages() {
         val fromId = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId")
-        //TODO (child listener)
+
+        ref.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val chatMessage = snapshot.getValue(ChatMessage::class.java) ?: return
+                adapter.add(LatestMessageRow(chatMessage))
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
-    private fun setupDummyRow() {
-        val adapter = GroupAdapter<GroupieViewHolder>()
-        adapter.add(LatestMessageRow())
-        adapter.add(LatestMessageRow())
-        adapter.add(LatestMessageRow())
-        binding.recyclerviewLatestMessages.adapter = adapter
-    }
+    val adapter = GroupAdapter<GroupieViewHolder>()
+
+//    private fun setupDummyRow() {
+//        adapter.add(LatestMessageRow())
+//        adapter.add(LatestMessageRow())
+//        adapter.add(LatestMessageRow())
+//    }
 
     private fun fetchCurrentUser() {
         val uid = FirebaseAuth.getInstance().uid

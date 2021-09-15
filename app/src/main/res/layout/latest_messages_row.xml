@@ -5,7 +5,7 @@
     android:layout_height="100dp">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageview_user_image_latest_message"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="32dp"
@@ -15,18 +15,18 @@
         app:srcCompat="@android:drawable/btn_star_big_on" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textview_username_latest_messages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Usuario"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/textview_text_latest_message"
+        app:layout_constraintStart_toEndOf="@+id/imageview_user_image_latest_message"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textview_text_latest_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -34,7 +34,6 @@
         android:text="Última mensagem"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/imageview_user_image_latest_message"
+        app:layout_constraintTop_toBottomOf="@+id/textview_username_latest_messages" />
 </androidx.constraintlayout.widget.ConstraintLayout>
