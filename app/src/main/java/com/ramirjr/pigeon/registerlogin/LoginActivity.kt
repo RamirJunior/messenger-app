@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.ramirjr.pigeon.databinding.ActivityLoginBinding
+import com.ramirjr.pigeon.messages.LatestMessagesActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -26,6 +27,9 @@ class LoginActivity : AppCompatActivity() {
 
                     //condição verdadeira
                     Log.d("Login", "Usuario logado com sucesso: ${it.result?.user?.uid}")
+
+                    startLatestMessagesActivity()
+
                 }
                 .addOnFailureListener {
                     Log.d("Login", "Falha ao logar usuario: ${it.message}")
@@ -39,5 +43,11 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun startLatestMessagesActivity() {
+        val intent = Intent(this, LatestMessagesActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }

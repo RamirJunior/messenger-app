@@ -28,21 +28,6 @@ class RegisterActivity : AppCompatActivity() {
     var uriPhotoSelected: Uri? = null
 
     @RequiresApi(Build.VERSION_CODES.P)
-    private val getContent = registerForActivityResult(
-        ActivityResultContracts
-            .GetContent()
-    ) { photoSelected: Uri? ->
-        if (photoSelected != null) {
-            uriPhotoSelected = photoSelected
-            val source = ImageDecoder.createSource(this.contentResolver, photoSelected)
-            val bitmapImage = ImageDecoder.decodeBitmap(source)
-            binding.imageviewUserPhoto.visibility = VISIBLE
-            binding.imageviewUserPhoto.setImageBitmap(bitmapImage)
-            binding.btnUserPhoto.visibility = INVISIBLE
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -62,11 +47,27 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.textviewSignHere.setOnClickListener {
-            startNewActivity()
+            startLoginActivity()
         }
     }
 
-    private fun startNewActivity() {
+    // configurando imagem recebida no imageview
+    @RequiresApi(Build.VERSION_CODES.P)
+    private val getContent = registerForActivityResult(
+        ActivityResultContracts
+            .GetContent()
+    ) { photoSelected: Uri? ->
+        if (photoSelected != null) {
+            uriPhotoSelected = photoSelected
+            val source = ImageDecoder.createSource(this.contentResolver, photoSelected)
+            val bitmapImage = ImageDecoder.decodeBitmap(source)
+            binding.imageviewUserPhoto.visibility = VISIBLE
+            binding.imageviewUserPhoto.setImageBitmap(bitmapImage)
+            binding.btnUserPhoto.visibility = INVISIBLE
+        }
+    }
+
+    private fun startLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
@@ -83,8 +84,6 @@ class RegisterActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
-
-                //condição verdadeira
                 Log.d("Cadastro", "Usuario criado com sucesso: ${it.result?.user?.uid}")
 
                 sendImageToFirebase()
