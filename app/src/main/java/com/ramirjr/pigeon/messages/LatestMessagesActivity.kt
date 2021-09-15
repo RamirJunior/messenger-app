@@ -27,20 +27,25 @@ class LatestMessagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupDummyRow()
+//        setupDummyRow()
+        listenLatestMessages()
 
         verifyUserIsLoggedIn()
 
         fetchCurrentUser()
     }
 
+    private fun listenLatestMessages() {
+        val fromId = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId")
+        //TODO (child listener)
+    }
+
     private fun setupDummyRow() {
         val adapter = GroupAdapter<GroupieViewHolder>()
-
         adapter.add(LatestMessageRow())
         adapter.add(LatestMessageRow())
         adapter.add(LatestMessageRow())
-
         binding.recyclerviewLatestMessages.adapter = adapter
     }
 

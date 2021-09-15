@@ -104,5 +104,15 @@ class ChatLogActivity : AppCompatActivity() {
                 binding.recyclerviewChatLog.scrollToPosition(adapter.itemCount - 1)
             }
         toRef.setValue(chatMessage)
+
+        //registrando ultima msg do remetente
+        val latestMessageRefSender =
+            FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId/$toId")
+        latestMessageRefSender.setValue(chatMessage)
+
+        //registrando ultima msg do receptor
+        val latestMessageRefReceiver =
+            FirebaseDatabase.getInstance().getReference("/latest-messages/$toId/$fromId")
+        latestMessageRefReceiver.setValue(chatMessage)
     }
 }
