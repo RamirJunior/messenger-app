@@ -13,8 +13,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityLatestMessagesBinding
+import com.ramirjr.pigeon.models.LatestMessageRow
 import com.ramirjr.pigeon.models.User
 import com.ramirjr.pigeon.registerlogin.LoginActivity
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 
 class LatestMessagesActivity : AppCompatActivity() {
 
@@ -24,9 +27,21 @@ class LatestMessagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setupDummyRow()
+
         verifyUserIsLoggedIn()
 
         fetchCurrentUser()
+    }
+
+    private fun setupDummyRow() {
+        val adapter = GroupAdapter<GroupieViewHolder>()
+
+        adapter.add(LatestMessageRow())
+        adapter.add(LatestMessageRow())
+        adapter.add(LatestMessageRow())
+
+        binding.recyclerviewLatestMessages.adapter = adapter
     }
 
     private fun fetchCurrentUser() {

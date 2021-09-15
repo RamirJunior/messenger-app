@@ -36,7 +36,6 @@ class ChatLogActivity : AppCompatActivity() {
         }
 
         listenFirebaseMessages()
-//        someMessages()
     }
 
     private fun listenFirebaseMessages() {
@@ -81,13 +80,6 @@ class ChatLogActivity : AppCompatActivity() {
             }
         })
     }
-
-    // mensagens de teste sem passar usuario
-//    private fun someMessages(){
-//        adapter.add(ChatItemReceived("to MESSAGEEEEE"))
-//        adapter.add(ChatItemReceived("to MESSAGEEEEE"))
-//        adapter.add(ChatItemReceived("to MESSAGEEEEE"))
-//    }
 
     private fun performSendMessages() {
         val text = binding.edittextChatLog.text.toString()
