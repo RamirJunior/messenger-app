@@ -35,6 +35,9 @@ class LatestMessagesActivity : AppCompatActivity() {
         fetchCurrentUser()
     }
 
+    val latestMessagesMap = HashMap<String, ChatMessage>()
+
+
     private fun listenLatestMessages() {
         val fromId = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/latest-messages/$fromId")
@@ -43,10 +46,17 @@ class LatestMessagesActivity : AppCompatActivity() {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java) ?: return
                 adapter.add(LatestMessageRow(chatMessage))
+
+                latestMessagesMap[snapshot.key!!] = chatMessage
+                refreshRecyclerViewMessage()
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
+                val chatMessage = snapshot.getValue(ChatMessage::class.java) ?: return
+                adapter.add(LatestMessageRow(chatMessage))
+
+                latestMessagesMap[snapshot.key!!] = chatMessage
+                refreshRecyclerViewMessage()
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
@@ -66,11 +76,12 @@ class LatestMessagesActivity : AppCompatActivity() {
 
     val adapter = GroupAdapter<GroupieViewHolder>()
 
-//    private fun setupDummyRow() {
-//        adapter.add(LatestMessageRow())
-//        adapter.add(LatestMessageRow())
-//        adapter.add(LatestMessageRow())
-//    }
+    private fun refreshRecyclerViewMessage() {
+        adapter.clear()
+        latestMessagesMap.values.forEach {
+            adapter.add(LatestMessageRow(it))
+        }
+    }
 
     private fun fetchCurrentUser() {
         val uid = FirebaseAuth.getInstance().uid
