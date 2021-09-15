@@ -20,7 +20,7 @@ class ChatLogActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityChatLogBinding.inflate(layoutInflater) }
     val adapter = GroupAdapter<GroupieViewHolder>()
-    val toUser: User? = null
+    val user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +29,7 @@ class ChatLogActivity : AppCompatActivity() {
         binding.recyclerviewChatLog.adapter = adapter
 
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
-        Log.d("ChatLog", "Usuário recebido = ${user}")
         supportActionBar?.title = user?.username
-
 
         binding.sendButtonChatLog.setOnClickListener {
             performSendMessages()
@@ -42,8 +40,10 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     private fun listenFirebaseMessages() {
+        val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val fromId = FirebaseAuth.getInstance().uid
-        val toId = toUser?.uid
+        val toId = user?.uid
+
         val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
 
         ref.addChildEventListener(object : ChildEventListener {
@@ -82,7 +82,7 @@ class ChatLogActivity : AppCompatActivity() {
         })
     }
 
-//    // mensagens de teste sem passar usuario
+    // mensagens de teste sem passar usuario
 //    private fun someMessages(){
 //        adapter.add(ChatItemReceived("to MESSAGEEEEE"))
 //        adapter.add(ChatItemReceived("to MESSAGEEEEE"))
