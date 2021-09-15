@@ -1,8 +1,9 @@
-package com.ramirjr.pigeon.models
+package com.ramirjr.pigeon.views
 
 import android.widget.ImageView
 import android.widget.TextView
 import com.ramirjr.pigeon.R
+import com.ramirjr.pigeon.models.User
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item

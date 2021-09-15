@@ -9,10 +9,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.ramirjr.pigeon.databinding.ActivityChatLogBinding
-import com.ramirjr.pigeon.models.ChatItemReceived
-import com.ramirjr.pigeon.models.ChatItemSent
 import com.ramirjr.pigeon.models.ChatMessage
 import com.ramirjr.pigeon.models.User
+import com.ramirjr.pigeon.views.ChatItemReceived
+import com.ramirjr.pigeon.views.ChatItemSent
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
@@ -35,10 +35,10 @@ class ChatLogActivity : AppCompatActivity() {
             performSendMessages()
         }
 
-        listenFirebaseMessages()
+        listenForMessages()
     }
 
-    private fun listenFirebaseMessages() {
+    private fun listenForMessages() {
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val fromId = FirebaseAuth.getInstance().uid
         val toId = user?.uid
@@ -50,9 +50,10 @@ class ChatLogActivity : AppCompatActivity() {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
 
                 if (chatMessage != null) {
+                    Log.d("ChatLog", chatMessage.message)
+
                     if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
                         val currentUser = LatestMessagesActivity.currentUser ?: return
-                        Log.d("ChatLog", "msg enviada: ${chatMessage.message}")
                         adapter.add(ChatItemSent(chatMessage.message, currentUser))
                     } else {
                         Log.d("ChatLog", "Msg recebida: ${chatMessage.message}")
@@ -61,6 +62,8 @@ class ChatLogActivity : AppCompatActivity() {
                         adapter.add(ChatItemReceived(chatMessage.message, userReceived!!))
                     }
                 }
+
+                binding.recyclerviewChatLog.scrollToPosition(adapter.itemCount - 1)
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {

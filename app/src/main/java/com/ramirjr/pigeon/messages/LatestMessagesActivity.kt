@@ -6,14 +6,15 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityLatestMessagesBinding
 import com.ramirjr.pigeon.models.ChatMessage
-import com.ramirjr.pigeon.models.LatestMessageRow
 import com.ramirjr.pigeon.models.User
 import com.ramirjr.pigeon.registerlogin.LoginActivity
+import com.ramirjr.pigeon.views.LatestMessageRow
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 
@@ -26,8 +27,21 @@ class LatestMessagesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.recyclerviewLatestMessages.adapter = adapter
+        binding.recyclerviewLatestMessages.addItemDecoration(
+            DividerItemDecoration(
+                this, DividerItemDecoration.VERTICAL
+            )
+        )
 
-//        setupDummyRow()
+        adapter.setOnItemClickListener { item, view ->
+            val intent = Intent(this, ChatLogActivity::class.java)
+
+            val row = item as LatestMessageRow
+            intent.putExtra(NewMessageActivity.USER_KEY, row.chatPartnerUser)
+
+            startActivity(intent)
+        }
+
         listenLatestMessages()
 
         verifyUserIsLoggedIn()
