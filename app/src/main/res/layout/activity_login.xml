@@ -126,7 +126,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textview_grupo" />
 
                 <TextView
-                    android:id="@+id/textview_registre_se"
+                    android:id="@+id/textview_register_now"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"

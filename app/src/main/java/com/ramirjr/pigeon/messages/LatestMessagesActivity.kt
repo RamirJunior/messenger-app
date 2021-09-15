@@ -24,9 +24,9 @@ class LatestMessagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        fetchCurrentUser()
-
         verifyUserIsLoggedIn()
+
+        fetchCurrentUser()
     }
 
     private fun fetchCurrentUser() {
@@ -41,7 +41,6 @@ class LatestMessagesActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
         })
     }
 

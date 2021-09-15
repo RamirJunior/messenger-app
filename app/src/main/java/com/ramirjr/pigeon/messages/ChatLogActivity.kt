@@ -2,27 +2,25 @@ package com.ramirjr.pigeon.messages
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityChatLogBinding
+import com.ramirjr.pigeon.models.ChatItemReceived
+import com.ramirjr.pigeon.models.ChatItemSent
 import com.ramirjr.pigeon.models.ChatMessage
 import com.ramirjr.pigeon.models.User
-import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.Item
 
 class ChatLogActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityChatLogBinding.inflate(layoutInflater) }
     val adapter = GroupAdapter<GroupieViewHolder>()
+    val toUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +32,19 @@ class ChatLogActivity : AppCompatActivity() {
         Log.d("ChatLog", "Usuário recebido = ${user}")
         supportActionBar?.title = user?.username
 
-        listenFirebaseMessages()
+
         binding.sendButtonChatLog.setOnClickListener {
             performSendMessages()
         }
+
+        listenFirebaseMessages()
+//        someMessages()
     }
 
     private fun listenFirebaseMessages() {
-        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+        val fromId = FirebaseAuth.getInstance().uid
+        val toId = toUser?.uid
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
 
         ref.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
@@ -50,10 +53,10 @@ class ChatLogActivity : AppCompatActivity() {
                 if (chatMessage != null) {
                     if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
                         val currentUser = LatestMessagesActivity.currentUser ?: return
-                        Log.d("ChatLog", "usuario recebida: ${currentUser}")
+                        Log.d("ChatLog", "msg enviada: ${chatMessage.message}")
                         adapter.add(ChatItemSent(chatMessage.message, currentUser))
                     } else {
-                        Log.d("ChatLog", "Mensagem recebida: ${chatMessage.message}")
+                        Log.d("ChatLog", "Msg recebida: ${chatMessage.message}")
                         val userReceived =
                             intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
                         adapter.add(ChatItemReceived(chatMessage.message, userReceived!!))
@@ -79,49 +82,35 @@ class ChatLogActivity : AppCompatActivity() {
         })
     }
 
+//    // mensagens de teste sem passar usuario
+//    private fun someMessages(){
+//        adapter.add(ChatItemReceived("to MESSAGEEEEE"))
+//        adapter.add(ChatItemReceived("to MESSAGEEEEE"))
+//        adapter.add(ChatItemReceived("to MESSAGEEEEE"))
+//    }
+
     private fun performSendMessages() {
         val text = binding.edittextChatLog.text.toString()
-
         val fromId = FirebaseAuth.getInstance().uid
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         val toId = user?.uid
+
         if (fromId == null) return
 
-        val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
+//        val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+
+        val toRef =
+            FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
+
         val chatMessage =
             ChatMessage(ref.key!!, text, fromId, toId, System.currentTimeMillis() / 1000)
-        ref.setValue(chatMessage).addOnSuccessListener {
-            Log.d("ChatLog", "Mensagem salva ${ref.key}")
-        }
-    }
-}
-
-class ChatItemReceived(val text: String, val user: User) : Item<GroupieViewHolder>() {
-    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.findViewById<TextView>(R.id.textview_msg_received).text = text
-
-        //carregando imagem do contato na conversa
-        val uri = user.profileImageUrl
-        val targetImageView = viewHolder.itemView.findViewById<ImageView>(R.id.imageViewReceived)
-        Picasso.get().load(uri).into(targetImageView)
-    }
-
-    override fun getLayout(): Int {
-        return R.layout.chat_message_received
-    }
-}
-
-class ChatItemSent(val text: String, val user: User) : Item<GroupieViewHolder>() {
-    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-        viewHolder.itemView.findViewById<TextView>(R.id.textview_msg_sent).text = text
-
-        //carregando minha imagem na conversa
-        val uri = user.profileImageUrl
-        val targetImageView = viewHolder.itemView.findViewById<ImageView>(R.id.imageViewSent)
-        Picasso.get().load(uri).into(targetImageView)
-    }
-
-    override fun getLayout(): Int {
-        return R.layout.chat_message_sent
+        ref.setValue(chatMessage)
+            .addOnSuccessListener {
+                Log.d("ChatLog", "Mensagem salva ${ref.key}")
+                binding.edittextChatLog.text.clear()
+                binding.recyclerviewChatLog.scrollToPosition(adapter.itemCount - 1)
+            }
+        toRef.setValue(chatMessage)
     }
 }
