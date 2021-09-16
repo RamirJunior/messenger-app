@@ -29,7 +29,9 @@ class ChatLogActivity : AppCompatActivity() {
         binding.recyclerviewChatLog.adapter = adapter
 
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+        setSupportActionBar(binding.toolbarChatLog)
         supportActionBar?.title = user?.username
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.sendButtonChatLog.setOnClickListener {
             performSendMessages()

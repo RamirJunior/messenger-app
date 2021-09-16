@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Pigeon</string>
+
+    <!-- Strings Login e Registro   -->
+    <string name="str_textview_welcome">Bem-vindo</string>
+    <string name="str_hint_email">E-mail</string>
+    <string name="str_hint_password">Senha</string>
+    <string name="str_btn_login">Entrar</string>
+    <string name="str_textview_dont_you_have_an_account">Não tem uma conta?</string>
+    <string name="str_textview_register_here">Registre-se aqui.</string>
+    <string name="str_btn_yout_photo">sua foto</string>
+    <string name="str_textview_create_yout_account">Crie sua conta</string>
+    <string name="str_hint_name">Nome</string>
+    <string name="str_btn_register">Registrar</string>
+    <string name="str_textview_already_have_an_account">Já tem uma conta?</string>
+    <string name="str_textview_sign_in">Entre aqui.</string>
+
+    <!--    Strings Ultimas conversas -->
+    <string name="str_textview_username">Usuario</string>
+    <string name="str_textview_latest_message_received">Última mensagem recebida</string>
 </resources>

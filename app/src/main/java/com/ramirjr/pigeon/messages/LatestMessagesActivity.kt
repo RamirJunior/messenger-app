@@ -25,7 +25,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        setSupportActionBar(binding.toolbarLatestMessages)
         verifyUserIsLoggedIn()
 
         binding.recyclerviewLatestMessages.adapter = adapter

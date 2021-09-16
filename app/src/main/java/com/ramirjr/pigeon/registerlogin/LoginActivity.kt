@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.ramirjr.pigeon.databinding.ActivityLoginBinding
 import com.ramirjr.pigeon.messages.LatestMessagesActivity
-import com.ramirjr.pigeon.messages.LoadingDialog
+import com.ramirjr.pigeon.messages.LoadingDialogLogin
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,7 +18,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val loadingDialog: LoadingDialog = LoadingDialog(this)
+        val loadingDialog: LoadingDialogLogin = LoadingDialogLogin(this)
 
         binding.btnEntrar.setOnClickListener {
             loadingDialog.startLoadingDialog()
