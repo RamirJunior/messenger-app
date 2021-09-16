@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.ramirjr.pigeon.databinding.ActivityRegisterBinding
 import com.ramirjr.pigeon.messages.LatestMessagesActivity
+import com.ramirjr.pigeon.messages.LoadingDialog
 import com.ramirjr.pigeon.models.User
 import java.util.*
 
@@ -32,7 +33,10 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val loadingDialog: LoadingDialog = LoadingDialog(this)
+
         binding.btnRegister.setOnClickListener {
+            loadingDialog.startLoadingDialog()
             registerUser()
         }
 

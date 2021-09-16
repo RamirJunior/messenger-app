@@ -26,6 +26,8 @@ class LatestMessagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        verifyUserIsLoggedIn()
+
         binding.recyclerviewLatestMessages.adapter = adapter
         binding.recyclerviewLatestMessages.addItemDecoration(
             DividerItemDecoration(
@@ -42,11 +44,9 @@ class LatestMessagesActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        listenLatestMessages()
-
-        verifyUserIsLoggedIn()
-
         fetchCurrentUser()
+
+        listenLatestMessages()
     }
 
     val latestMessagesMap = HashMap<String, ChatMessage>()

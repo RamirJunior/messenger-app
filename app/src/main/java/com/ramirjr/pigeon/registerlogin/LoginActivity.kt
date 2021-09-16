@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.ramirjr.pigeon.databinding.ActivityLoginBinding
 import com.ramirjr.pigeon.messages.LatestMessagesActivity
+import com.ramirjr.pigeon.messages.LoadingDialog
 
 class LoginActivity : AppCompatActivity() {
 
@@ -17,9 +18,13 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val loadingDialog: LoadingDialog = LoadingDialog(this)
+
         binding.btnEntrar.setOnClickListener {
+            loadingDialog.startLoadingDialog()
+
             val email = binding.txtInputEmail.editText?.text.toString()
-            val password = binding.txtInputPassword.editText.toString()
+            val password = binding.txtInputPassword.editText?.text.toString()
 
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
