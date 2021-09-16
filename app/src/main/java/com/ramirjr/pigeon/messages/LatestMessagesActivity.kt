@@ -25,7 +25,8 @@ class LatestMessagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setSupportActionBar(binding.toolbarLatestMessages)
+        setToolbar()
+
         verifyUserIsLoggedIn()
 
         binding.recyclerviewLatestMessages.adapter = adapter
@@ -49,8 +50,12 @@ class LatestMessagesActivity : AppCompatActivity() {
         listenLatestMessages()
     }
 
-    val latestMessagesMap = HashMap<String, ChatMessage>()
+    private fun setToolbar() {
+        setSupportActionBar(binding.toolbarLatestMessages)
+        supportActionBar?.title = null
+    }
 
+    val latestMessagesMap = HashMap<String, ChatMessage>()
 
     private fun listenLatestMessages() {
         val fromId = FirebaseAuth.getInstance().uid
@@ -69,6 +74,7 @@ class LatestMessagesActivity : AppCompatActivity() {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java) ?: return
                 adapter.add(LatestMessageRow(chatMessage))
 
+                // convertendo as ultimas msgs em hash e recarregando no recyclerview
                 latestMessagesMap[snapshot.key!!] = chatMessage
                 refreshRecyclerViewMessage()
             }

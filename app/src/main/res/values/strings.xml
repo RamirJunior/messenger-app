@@ -18,4 +18,5 @@
     <!--    Strings Ultimas conversas -->
     <string name="str_textview_username">Usuario</string>
     <string name="str_textview_latest_message_received">Última mensagem recebida</string>
+    <string name="str_textview_dummy_message">Está é a minha mensagem e pode ser que ela ocupe uma area muito maior</string>
 </resources>

@@ -7,9 +7,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:backgroundTint="@color/gray_pg"
+        android:layout_margin="2dp"
         app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,19 +20,6 @@
             android:layout_height="match_parent"
             android:paddingLeft="16dp">
 
-            <TextView
-                android:id="@+id/textview_username"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Nome do usuário"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageview_new_message"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageview_new_message"
-                app:layout_constraintTop_toTopOf="@+id/imageview_new_message" />
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageview_new_message"
                 android:layout_width="60dp"
@@ -40,12 +27,26 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                app:civ_border_color="@color/white"
+                app:civ_border_color="@color/blue_pg"
                 app:civ_border_width="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/std_profile" />
+
+            <TextView
+                android:id="@+id/textview_username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Nome do usuário"
+                android:textColor="@color/blue_pg"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageview_new_message"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageview_new_message"
+                app:layout_constraintTop_toTopOf="@+id/imageview_new_message" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

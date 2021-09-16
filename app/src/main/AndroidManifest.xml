@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pigeon">
+
         <activity
             android:name=".messages.LatestMessagesActivity"
             android:exported="true"
@@ -47,6 +48,14 @@
         <activity
             android:name=".registerlogin.LoginActivity"
             android:windowSoftInputMode="adjustResize" />
+
+        <service
+            android:name=".models.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
     </application>
 

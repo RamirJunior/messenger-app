@@ -9,17 +9,18 @@
         android:id="@+id/textview_msg_received"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:background="@drawable/rounded_message_received"
         android:lineSpacingMultiplier="1.2"
         android:maxWidth="280dp"
-        android:paddingStart="8dp"
-        android:paddingTop="4dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="4dp"
-        android:text="Está é a minha mensagem e pode ser que ela ocupe uma area muito maior"
-        android:textSize="14sp"
+        android:paddingStart="10dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="6dp"
+        android:text="@string/str_textview_dummy_message"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/imageViewReceived"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewReceived" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewReceived"
