@@ -16,8 +16,10 @@
     <color name="blue_pg">#29628F</color>
     <color name="orange_pg">#eb7b59</color>
     <color name="red_pg">#cf4647</color>
+    <color name="redHight_pg">#FD0002</color>
     <color name="dark_pg">#524656</color>
     <color name="gray_pg">#eeeeee</color>
     <color name="black_pg">#3c3c3c</color>
+    <color name="gold_pg">#EFAF2D</color>
 
 </resources>

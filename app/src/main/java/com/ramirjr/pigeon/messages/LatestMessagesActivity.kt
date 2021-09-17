@@ -80,15 +80,15 @@ class LatestMessagesActivity : AppCompatActivity() {
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
+//                TODO("Not yet implemented")
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
+//                TODO("Not yet implemented")
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+//                TODO("Not yet implemented")
             }
 
         })
@@ -132,7 +132,6 @@ class LatestMessagesActivity : AppCompatActivity() {
             R.id.option_new_message -> {
                 val intent = Intent(this, NewMessageActivity::class.java)
                 startActivity(intent)
-
             }
             R.id.option_sign_out -> {
                 FirebaseAuth.getInstance().signOut()

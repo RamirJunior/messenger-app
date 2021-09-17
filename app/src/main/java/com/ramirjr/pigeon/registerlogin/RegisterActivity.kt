@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Toast
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityRegisterBinding
 import com.ramirjr.pigeon.messages.LatestMessagesActivity
 import com.ramirjr.pigeon.messages.LoadingDialogRegister
@@ -27,31 +29,27 @@ class RegisterActivity : AppCompatActivity() {
         ActivityRegisterBinding.inflate(layoutInflater)
     }
     var uriPhotoSelected: Uri? = null
+    val loadingDialogRegister: LoadingDialogRegister = LoadingDialogRegister(this)
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val loadingDialogRegister: LoadingDialogRegister = LoadingDialogRegister(this)
-
-        binding.btnRegister.setOnClickListener {
-            loadingDialogRegister.startLoadingDialog()
-            registerUser()
-        }
-
         binding.btnUserPhoto.setOnClickListener {
-            Log.d("botao", "clicou no botao")
             getContent.launch("image/*")
         }
 
         binding.imageviewUserPhoto.setOnClickListener {
-            Log.d("ImageView", "clicou na imageview")
             getContent.launch("image/*")
         }
 
         binding.textviewSignHere.setOnClickListener {
             startLoginActivity()
+        }
+
+        binding.btnRegister.setOnClickListener {
+            registerUser()
         }
     }
 
@@ -71,6 +69,17 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun validateEmailAddress(email: String?): Boolean {
+        val emailInput = email
+        if (!emailInput.isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            binding.txtInputEmail.error = null
+            return true
+        } else {
+            binding.txtInputEmail.error = getString(R.string.invalid_email)
+            return false
+        }
+    }
+
     private fun startLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
@@ -86,19 +95,27 @@ class RegisterActivity : AppCompatActivity() {
             return true
         }
 
+        if (validateEmailAddress(email)) {
+            registerOnFirebase(email, password)
+        }
+
+        return false
+    }
+
+    private fun registerOnFirebase(email: String, password: String) {
+
+        loadingDialogRegister.startLoadingDialog()
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
-                Log.d("Cadastro", "Usuario criado com sucesso: ${it.result?.user?.uid}")
-
+                Log.d("Register", "Usuario criado com sucesso: ${it.result?.user?.uid}")
                 sendImageToFirebase()
             }
             .addOnFailureListener {
-                Log.d("Main", "Falha ao criar usuario: ${it.message}")
+                Log.d("Register", "Falha ao criar usuario: ${it.message}")
                 Toast.makeText(this, "Falha ao criar usuario: ${it.message}", Toast.LENGTH_SHORT)
                     .show()
             }
-        return false
     }
 
     private fun sendImageToFirebase() {
@@ -116,7 +133,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
                 .addOnFailureListener {
-                    //TODO do some logging here
+                    Log.d("Register", "Falha ao enviar a imagem: ${it.message}")
                 }
         } else return
     }
@@ -128,7 +145,7 @@ class RegisterActivity : AppCompatActivity() {
 
         ref.setValue(user)
             .addOnSuccessListener {
-                Log.d("Registro", "usuario salvo no BD do Firebase")
+                Log.d("Registro", "Usuario registrado no Firebase")
 
                 val intent = Intent(this, LatestMessagesActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)

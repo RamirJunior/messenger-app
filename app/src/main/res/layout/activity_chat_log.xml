@@ -11,11 +11,14 @@
         android:id="@+id/toolbar_chat_log"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/gray_pg"
+        android:background="@drawable/gradient_toolbar"
+        android:foregroundTintMode="screen"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:titleTextColor="@color/white"
+        tools:targetApi="lollipop" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_chat_log"

@@ -10,10 +10,11 @@
         android:id="@+id/toolbar_latest_messages"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/gray_pg"
+        android:background="@drawable/gradient_toolbar"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintStart_toStartOf="parent"
+        app:elevation="16dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +25,7 @@
                 android:id="@+id/toolbar_logo"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:src="@drawable/pigeon_logo"
+                android:src="@drawable/logotipo_pigeon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

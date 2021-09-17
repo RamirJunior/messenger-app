@@ -10,7 +10,7 @@ class LoadingDialogLogin internal constructor(private val activity: Activity) {
         val builder = AlertDialog.Builder(activity)
         val inflater = activity.layoutInflater
         builder.setView(inflater.inflate(R.layout.loading_logging_user, null))
-        builder.setCancelable(false)
+        builder.setCancelable(true)
         dialog = builder.create()
         dialog!!.show()
     }
