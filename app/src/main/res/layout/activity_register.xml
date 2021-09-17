@@ -96,6 +96,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/str_hint_name"
+                    app:endIconMode="clear_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textview_create_account">
@@ -114,6 +115,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/str_hint_email"
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/ic_baseline_person_24"
                     app:layout_constraintEnd_toEndOf="@+id/txt_input_name"
                     app:layout_constraintStart_toStartOf="@+id/txt_input_name"
                     app:layout_constraintTop_toBottomOf="@+id/txt_input_name">
@@ -131,6 +134,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/str_hint_password"
+                    app:endIconMode="password_toggle"
+                    app:startIconDrawable="@drawable/ic_baseline_lock_24"
                     app:layout_constraintEnd_toEndOf="@+id/txt_input_email"
                     app:layout_constraintStart_toStartOf="@+id/txt_input_email"
                     app:layout_constraintTop_toBottomOf="@+id/txt_input_email">

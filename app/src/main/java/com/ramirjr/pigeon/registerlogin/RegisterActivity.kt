@@ -87,8 +87,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser(): Boolean {
-        var email = binding.txtInputEmail.editText?.text.toString()
-        var password = binding.txtInputPassword.editText?.text.toString()
+        val email = binding.txtInputEmail.editText?.text.toString()
+        val password = binding.txtInputPassword.editText?.text.toString()
 
         if ((email.isEmpty() || password.isEmpty())) {
             Toast.makeText(this, "Por favor, digite E-mail/Senha.", Toast.LENGTH_SHORT).show()
