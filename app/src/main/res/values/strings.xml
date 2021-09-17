@@ -24,4 +24,9 @@
     <string name="str_icon_new_chat">Nova conversa</string>
     <string name="str_icon_logout">Sair</string>
     <string name="invalid_email">E-mail inválido</string>
+    <string name="invalid_password">A senha deve ter no mínimo 6 caracteres.</string>
+    <string name="str_logoname">Pigeon</string>
+    <string name="str_dialog_loading_user">Carregando...</string>
+    <string name="str_dialog_registering_user">Registrando usuário...</string>
+    <string name="str_new_messages_username">Nome do usuário</string>
 </resources>

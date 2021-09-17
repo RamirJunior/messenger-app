@@ -1,4 +1,4 @@
-package com.ramirjr.pigeon.messages
+package com.ramirjr.pigeon.views
 
 import android.app.Activity
 import androidx.appcompat.app.AlertDialog

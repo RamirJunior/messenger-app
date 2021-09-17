@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityLoginBinding
 import com.ramirjr.pigeon.messages.LatestMessagesActivity
-import com.ramirjr.pigeon.messages.LoadingDialogLogin
+import com.ramirjr.pigeon.views.LoadingDialogLogin
 
 class LoginActivity : AppCompatActivity() {
 
@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.txtInputEmail.editText?.text.toString()
             val password = binding.txtInputPassword.editText?.text.toString()
 
-            if (validateEmailAddress(email)) {
+            if (validateEmail(email) && validatePassword(password)) {
                 logOnFirebase(email, password)
             }
         }
@@ -50,20 +50,31 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("Login", "Falha ao logar usuario: ${it.message}")
                 Toast.makeText(
                     this,
-                    "Usuário não encontrado.\nPor favor registre-se.",
+                    "Usuário não encontrado.\n\nPor favor registre-se.",
                     Toast.LENGTH_LONG
                 )
                     .show()
             }
     }
 
-    private fun validateEmailAddress(email: String?): Boolean {
+    private fun validateEmail(email: String?): Boolean {
         val emailInput = email
         if (!emailInput.isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
             binding.txtInputEmail.error = null
             return true
         } else {
             binding.txtInputEmail.error = getString(R.string.invalid_email)
+            return false
+        }
+    }
+
+    private fun validatePassword(password: String?): Boolean {
+        val passwordInput = password
+        if (!passwordInput.isNullOrEmpty() && passwordInput.length >= 6) {
+            binding.txtInputPassword.error = null
+            return true
+        } else {
+            binding.txtInputPassword.error = getString(R.string.invalid_password)
             return false
         }
     }

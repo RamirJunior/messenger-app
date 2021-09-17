@@ -19,8 +19,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityRegisterBinding
 import com.ramirjr.pigeon.messages.LatestMessagesActivity
-import com.ramirjr.pigeon.messages.LoadingDialogRegister
 import com.ramirjr.pigeon.models.User
+import com.ramirjr.pigeon.views.LoadingDialogRegister
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
