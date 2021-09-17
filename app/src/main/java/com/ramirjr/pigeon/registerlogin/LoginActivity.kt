@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.ramirjr.pigeon.R
 import com.ramirjr.pigeon.databinding.ActivityLoginBinding
 import com.ramirjr.pigeon.messages.LatestMessagesActivity
-import com.ramirjr.pigeon.messages.LoadingDialogLogin
+import com.ramirjr.pigeon.views.LoadingDialogLogin
 
 class LoginActivity : AppCompatActivity() {
 
