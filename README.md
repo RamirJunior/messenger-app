@@ -16,10 +16,6 @@
 
 - Exibir notificações com aplicação em primeiro e segundo plano.
 
-### Arquitetura :
-
-- MVVM
-
 ### Tecnologias Utilizadas :
 
 - Constraint Layout
