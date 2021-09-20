@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_initial_pigeon"
+    tools:context=".registerlogin.RegisterActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:padding="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/cardview_register"
+            tools:layout_editor_absoluteX="16dp">
+
+            <ImageView
+                android:id="@+id/logo_pigeon"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:src="@drawable/logotipo_pigeon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_user_photo"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/rounded_corners"
+                android:text="@string/str_btn_yout_photo"
+                android:visibility="visible"
+                app:backgroundTint="@color/orange_pg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageview_user_photo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_user_photo"
+                app:layout_constraintEnd_toEndOf="@+id/btn_user_photo"
+                app:layout_constraintStart_toStartOf="@+id/btn_user_photo"
+                app:layout_constraintTop_toTopOf="@+id/btn_user_photo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/textview_create_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/str_textview_create_yout_account"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txt_input_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/str_hint_name"
+                    app:endIconMode="clear_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_create_account">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:inputType="textImeMultiLine"
+                        android:maxLength="30" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txt_input_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/str_hint_email"
+                    app:endIconMode="clear_text"
+                    app:startIconDrawable="@drawable/ic_baseline_person_24"
+                    app:layout_constraintEnd_toEndOf="@+id/txt_input_name"
+                    app:layout_constraintStart_toStartOf="@+id/txt_input_name"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_input_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:inputType="textEmailAddress" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txt_input_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/str_hint_password"
+                    app:endIconMode="password_toggle"
+                    app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                    app:layout_constraintEnd_toEndOf="@+id/txt_input_email"
+                    app:layout_constraintStart_toStartOf="@+id/txt_input_email"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_input_email">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@drawable/rounded_btn"
+                    android:text="@string/str_btn_register"
+                    app:backgroundTint="@color/orange_pg"
+                    app:layout_constraintEnd_toEndOf="@+id/txt_input_password"
+                    app:layout_constraintStart_toStartOf="@+id/txt_input_password"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_input_password" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/textview_grupo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_register">
+
+                    <TextView
+                        android:id="@+id/textview_already_have_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/str_textview_already_have_an_account"
+                        app:layout_constraintStart_toStartOf="@+id/textview_grupo"
+                        app:layout_constraintTop_toTopOf="@+id/textview_grupo" />
+
+                    <TextView
+                        android:id="@+id/textview_sign_here"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/str_textview_sign_in"
+                        android:textColor="@color/teal_700"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/textview_already_have_account"
+                        app:layout_constraintTop_toTopOf="@+id/textview_grupo" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "736707464898",
+    "project_id": "pigeon-57e2a",
+    "storage_bucket": "pigeon-57e2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736707464898:android:b8cdeedf57def75c46b55b",
+        "android_client_info": {
+          "package_name": "com.ramirjr.pigeon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736707464898-qi20a3lk6vn1pq6a733reknbrp8qv1t0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXY_Q8InE4xfrJsViEoMpXdrIsLvivDM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736707464898-qi20a3lk6vn1pq6a733reknbrp8qv1t0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

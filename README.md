@@ -7,20 +7,24 @@
 ### Funcionalidades :
 
 - Cadastro de usuário;
-- Login pré cadastrado;
-- Salvamento de conversa e suas mensagens;
+- Login;
+- Carregamento de conversas;
+- Início de nova conversa com dados remotos;
 - Envio e recebimento real-time de mensagens.
 
 ### Desafio :
 
-- Exibir notificações em primeiro e segundo plano.
+- Exibir notificações com aplicação em primeiro e segundo plano.
 
 ### Arquitetura :
 
 - MVVM
 
-### Principais Tecnologias :
+### Tecnologias Utilizadas :
 
-- Firebase
-- RecyclerView
 - Constraint Layout
+- Circle Image View
+- RecyclerView
+- Firebase
+- Groupie
+- Picasso
